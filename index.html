@@ -16,12 +16,6 @@
         overflow: auto;
       }
 
-      .container {
-        background-color: red;
-        -webkit-mask-image: url("./src/assets/mask.svg");
-        -webkit-mask-size: 600px 400px;
-      }
-
       img {
         width: 600px;
         height: 400px;
@@ -37,8 +31,7 @@
   <body>
     <section class="container">
       <img id="real" src="./src/assets/me.jpg" alt="" />
-      <!-- <img id="mask" src="" alt="" /> -->
-      <div class="caption">123123123123123123123123123123123123</div>
+      <canvas id="virtual" width="600" height="400"></canvas>
     </section>
     <script type="module" src="/src/main.ts"></script>
   </body>

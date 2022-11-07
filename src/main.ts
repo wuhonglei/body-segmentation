@@ -17,19 +17,19 @@ const segmenter = await bodySegmentation.createSegmenter(
 );
 
 const realImg: HTMLImageElement = document.querySelector("#real")!;
-const maskImg: HTMLImageElement = document.querySelector("#mask")!;
 
 const segmentation = await segmenter.segmentPeople(realImg);
-
-function getImgUrl(imgData: ImageData): string {
-  const canvas = document.createElement("canvas");
-  canvas.width = imgData.width;
-  canvas.height = imgData.height;
-
-  const ctx = canvas.getContext("2d")!;
-  ctx.putImageData(imgData, 0, 0);
-  return canvas.toDataURL("image/png");
-}
+const opacity = 0.5;
+const flipHorizontal = false;
+const maskBlurAmount = 5;
+const canvas = document.querySelector("#virtual") as HTMLCanvasElement;
 
 const coloredPartImage = await bodySegmentation.toBinaryMask(segmentation);
-maskImg.src = getImgUrl(coloredPartImage);
+bodySegmentation.drawMask(
+  canvas,
+  realImg,
+  coloredPartImage,
+  opacity,
+  maskBlurAmount,
+  flipHorizontal
+);
